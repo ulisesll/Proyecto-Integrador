@@ -245,7 +245,7 @@ public class MenuOpciones {
 		try {
 			 Lista<Estudiante> prestamosMasDeTres=new Lista<Estudiante>();
 			 //Coloque aquí la linea faltante para invocar al método mostrarEstudiantesMasDeTres()
-			 prestamosMasDeTres=null; //Sustituya a Null con lo correcto
+			 prestamosMasDeTres=univ.mostrarEstudiantesMasDeTres(); //Sustituya a Null con lo correcto
 			 if (prestamosMasDeTres.getTamanio()==0)
 				 System.out.println("*** No Existe ningún estudiante con mas de TRES préstamos ***");
 			 else
@@ -255,9 +255,13 @@ public class MenuOpciones {
 			//de alumnos que tienen mas de tres prestamos
 			//debiendo imprimir: codigo,email,Programa, sexo y fecha de Nacimiento del estudiante
 			 for(int i=0;i<prestamosMasDeTres.getTamanio();i++) {
-				/*
-				 coloque aquí lo conducente
-			   */
+				Estudiante estudiante = prestamosMasDeTres.getValor(i);
+				System.out.println("Codigo: "+ estudiante.getCodigo());
+				System.out.println("Email: "+ estudiante.getEmail());
+				System.out.println("Programa: "+ estudiante.getPrograma());
+				System.out.println("Sexo: "+ estudiante.getSexo());
+				System.out.println("Fecha de Nacimiento: "+ estudiante.getFechaNac());
+
 			 }
 		
 		}

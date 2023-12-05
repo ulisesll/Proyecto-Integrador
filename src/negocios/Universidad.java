@@ -36,21 +36,24 @@ public class Universidad {
 		
 		
 	}
+	//Jesús Omar Langarica Ornelas
 	public boolean agregarEstudiante(int codigo, String nombre,
 			String email,Fecha fechaNac, String sexo, String programa)
 					throws PosicionIlegalException{
 		//Estudiante est = buscarEstudiante(codigo);
 		//Modifique la siguiente línes para que busque al estudiante
 		//utilizando el método buscarEstudiante
-		Estudiante est = null; //deberá sustituir el null por la accion correcta
+		Estudiante est = buscarEstudiante(codigo);
 		if (est == null) {
 			estudiantes.agregar(new Estudiante(codigo, nombre,
 					email, fechaNac, sexo, programa));
 			return true;
 		}
-		return false;
-			
+		else{
+			return false;
+		}			
 	}
+
 	public Estudiante buscarEstudiante(int codigo) throws PosicionIlegalException{
 		for (int i=0;i<estudiantes.getTamanio();i++) {
 			Estudiante est = estudiantes.getValor(i);
@@ -119,6 +122,8 @@ public class Universidad {
 		}
 		return null;
 	}
+
+	
 	public Lista<Recurso> consultarRecursosDeUnEstudiante(int codigo) throws
 	   PosicionIlegalException {
 		Estudiante est = buscarEstudiante(codigo);
@@ -129,7 +134,7 @@ public class Universidad {
 		Lista<Recurso> recursosprestados = new Lista<Recurso>();
 		//Modifique el cabecero del siguiente for (linea 132), para que muestre todos los 
 		//elementos de la lista ya que hay un error
-		for(int i=1;i<prestamos.getTamanio();i++) {
+		for(int i=0;i<prestamos.getTamanio();i++) {
 			Prestamo pres = prestamos.getValor(i);
 			if (pres.getEstudiante().getCodigo() ==codigo && 
 					!pres.getRecurso().isDisponible()) {
@@ -137,7 +142,6 @@ public class Universidad {
 			}
 		}
 		return recursosprestados;
-		
 	}
 	
 	public boolean devolverRecurso(int id) throws PosicionIlegalException{
@@ -257,20 +261,28 @@ public class Universidad {
 	 * @throws PosicionIlegalException
 	 */
 	
+	
 	public Lista<Estudiante> mostrarEstudiantesMasDeTres() throws PosicionIlegalException {
-		 Lista<Estudiante> prestamosMasDeTres=new Lista<Estudiante>();
+		 Lista<Estudiante> estudiantesMasDeTres=new Lista<Estudiante>();
+		 for(int i=0;i<estudiantes.getTamanio();i++){
+			Estudiante e = estudiantes.getValor(i);
+			if(contadorPrestamos(e)>3){
+				estudiantesMasDeTres.agregar(e);
+			}
+		 }
 		
-		
-		
-		return prestamosMasDeTres;
-	}
-	
+		return estudiantesMasDeTres;
+	 }
+
+     
+	 public int contadorPrestamos(Estudiante estudiante) throws PosicionIlegalException{
+		int c=0;
+		for(int i=0; i < prestamos.getTamanio(); i++){
+			Prestamo prestamo = prestamos.getValor(i);
+			if(prestamo.getEstudiante().equals(estudiante)){
+				c++;
+			}
+		}
+		return c;
+	 }
 }
-		
-	
-	
-
-
-
-
-
